@@ -15,10 +15,10 @@
           <h1 class="text-white q-ma-none">Sami Janafse</h1><br />
           <h2 class="q-ma-none">FrontEnd Developer</h2>
           <div class="q-py-lg row justify-center items-center">
-            <img src="src/assets/vue_logo.png" alt="Vue.js" class="stack-img q-pr-sm" />
-            <img src="src/assets/angular_logo.png" alt="Angular" class="ang-img q-pr-sm" />
-            <img src="src/assets/react_icon.png" alt="react" class="stack-img q-pr-sm" />
-            <img src="src/assets/rails_icon.png" alt="Ruby on Rails" class="stack-img" />
+            <img src="src/statics/vue_logo.png" alt="Vue.js" class="stack-img q-pr-sm" />
+            <img src="src/statics/angular_logo.png" alt="Angular" class="ang-img q-pr-sm" />
+            <img src="src/statics/react_icon.png" alt="react" class="stack-img q-pr-sm" />
+            <img src="src/statics/rails_icon.png" alt="Ruby on Rails" class="stack-img" />
           </div>
           <div class="q-py-md">
             <q-btn outline class=" q-mx-md" @click="scrollToSection(button)" v-for=" button  in  buttons.slice(1)"
@@ -42,10 +42,10 @@
       <h3 class="q-mb-sm" style="height: 0px;">About</h3>
 
       <div class="row justify-start items-center col-12">
-        <img src="src/assets/vue_logo.png" alt="Vue.js" class="stack-img q-pr-sm" />
-        <img src="src/assets/angular_logo.png" alt="Angular" class="ang-img q-pr-sm" />
-        <img src="src/assets/react_icon.png" alt="react" class="stack-img q-pr-sm" />
-        <img src="src/assets/rails_icon.png" alt="Ruby on Rails" class="stack-img" />
+        <img src="src/statics/vue_logo.png" alt="Vue.js" class="stack-img q-pr-sm" />
+        <img src="src/statics/angular_logo.png" alt="Angular" class="ang-img q-pr-sm" />
+        <img src="src/statics/react_icon.png" alt="react" class="stack-img q-pr-sm" />
+        <img src="src/statics/rails_icon.png" alt="Ruby on Rails" class="stack-img" />
       </div>
       <div class="row">
         <div class="col-8">
@@ -56,7 +56,7 @@
 
         </div>
         <div class="col-4">
-          <img src="src/assets/foto_perfil.png" alt="profile_pic" class="profile-img q-pl-md" />
+          <img src="src/statics/foto_perfil.png" alt="profile_pic" class="profile-img q-pl-md" />
         </div>
       </div>
 
