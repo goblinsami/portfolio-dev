@@ -66,9 +66,17 @@
 
 <script setup >
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
 import { useQuasar } from 'quasar'
 import ProjectItem from 'components/ProjectItem.vue'
+import { useMeta } from 'quasar'
+
+const metaData = {
+  // sets document title
+  title: 'Sami Janafse - FrontEnd Developer',
+  // optional; sets final title as "Index Page - My Website", useful for multiple level meta
+
+  // meta tags
+}
 const buttons = ref(['Home', 'Projects', 'About'])
 
 const slide = ref(1)
@@ -167,7 +175,7 @@ const isScrolled = ref(false);
 
 
 onMounted(() => {
-  $q.dark.set(true), window.addEventListener('scroll', handleScroll);
+  $q.dark.set(true), useMeta(metaData);
 
 })
 onBeforeUnmount(() => {
