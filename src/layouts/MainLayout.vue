@@ -1,7 +1,7 @@
 <template>
   <main>
     <section class="nav">
-      <nav :class="{ 'scroll-down': isScrolled }" class="q-pa-md bar row">
+      <nav class="q-pa-md bar row">
         <q-btn @click="scrollToSection(button)" flat class=" cursor-pointer" v-for="button in buttons" :key="button">{{
           button }}</q-btn>
         <q-space />
@@ -15,10 +15,18 @@
           <h1 class="text-white q-ma-none">Sami Janafse</h1><br />
           <h2 class="q-ma-none">FrontEnd Developer</h2>
           <div class="q-py-lg row justify-center items-center">
-            <img src="~assets/vue_logo.png" alt="Vue.js" class="stack-img q-pr-sm" />
-            <img src="~assets/angular_logo.png" alt="Angular" class="ang-img q-pr-sm" />
-            <img src="~assets/react_icon.png" alt="react" class="stack-img q-pr-sm" />
-            <img src="~assets/rails_icon.png" alt="Ruby on Rails" class="stack-img" />
+            <a target="_blank" href="https://vuejs.org/guide/introduction.html">
+              <img src="~assets/vue_logo.png" alt="Vue.js" class="stack-img q-pr-sm" href="" />
+            </a>
+            <a target="_blank" href="https://angular.io/">
+              <img src="~assets/cropped.png" alt="Angular" class="stack-img q-pr-sm" />
+            </a>
+            <a target="_blank" href="https://react.dev/">
+              <img src="~assets/react_icon.png" alt="react" class="stack-img q-pr-sm" />
+            </a>
+            <a target="_blank" href="https://guides.rubyonrails.org/">
+              <img src="~assets/rails_icon.png" alt="Ruby on Rails" class="stack-img" />
+            </a>
           </div>
           <div class="q-py-md">
             <q-btn outline class=" q-mx-md" @click="scrollToSection(button)" v-for=" button  in  buttons.slice(1)"
@@ -39,23 +47,32 @@
     </section>
     <section id="about" class="about-container row text-center justify-center">
       <!-- form to contact -->
-      <h3 class="q-mb-sm" style="height: 0px;">About</h3>
+      <h3 class="q-mb-xl about-header" style="height: 0px;">About</h3>
+      <!--  $q.screen.width < 1025 -->
+      <div :class="'row items-end col-12 q-pb-md stack-list q-px-sm q-py-md'">
+        <a target="_blank" href="https://vuejs.org/guide/introduction.html">
+          <img src="~assets/vue_logo.png" alt="Vue.js" class="stack-img-mb q-pr-sm" />
+        </a>
+        <a target="_blank" href="https://angular.io/">
+          <img src="~assets/cropped.png" alt="Angular" class="stack-img-mb q-pr-sm" />
+        </a>
+        <a target="_blank" href="https://react.dev/">
+          <img src="~assets/react_icon.png" alt="react" class="stack-img-mb q-pr-sm" />
+        </a>
+        <a target="_blank" href="https://guides.rubyonrails.org/">
+          <img src="~assets/rails_icon.png" alt="Ruby on Rails" class="stack-img-mb" />
+        </a>
 
-      <div class="row justify-start items-center col-12">
-        <img src="~assets/vue_logo.png" alt="Vue.js" class="stack-img q-pr-sm" />
-        <img src="~assets/angular_logo.png" alt="Angular" class="ang-img q-pr-sm" />
-        <img src="~assets/react_icon.png" alt="react" class="stack-img q-pr-sm" />
-        <img src="~assets/rails_icon.png" alt="Ruby on Rails" class="stack-img" />
       </div>
-      <div class="row">
-        <div class="col-8">
+      <div class="row items-start justify-center">
+        <div class="col-12 col-md-8 q-px-sm">
           <p v-html="aboutText[0]"></p>
           <p v-html="aboutText[1]"></p>
           <p v-html="aboutText[3]"></p>
           <p v-html="aboutText[2]"></p>
 
         </div>
-        <div class="col-4">
+        <div class="col-12 col-md-4 text-center">
           <img src="~assets/foto_perfil.png" alt="profile_pic" class="profile-img q-pl-md" />
         </div>
       </div>
@@ -232,9 +249,17 @@ body {
   height: 50px;
 }
 
-.ang-img {
-  height: 60px;
+
+.stack-img-mb {
+  height: 50px;
+
+  @media (max-width: 1340px) {
+    height: 30px;
+
+  }
 }
+
+
 
 .profile-img {
   height: 280px;
@@ -249,7 +274,6 @@ body {
 
 .about-container {
   height: 100vh;
-
   max-width: 800px;
   display: flex;
   margin: 0 auto;
@@ -283,12 +307,5 @@ body.body--light {
     color: var(--q-dark-positive) !important;
   }
 
-}
-
-nav .scroll-down {
-  background-color: rgba(23, 131, 48, 0.7) !important;
-  /* Cambia el color de fondo y ajusta la opacidad según sea necesario */
-  transition: background-color 0.3s ease;
-  /* Agrega una transición suave */
 }
 </style>
