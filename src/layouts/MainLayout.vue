@@ -39,15 +39,15 @@
     <section id="projects" class="projects-container">
       <!-- carousels -->
       <section class="">
-        <h3 class="col-12 text-center q-my-sm">Projects</h3>
+        <h3 class="col-12 text-center q-my-sm text-bold">Projects</h3>
         <div class="q-pa-md col-8">
-          <ProjectItem v-for=" project  in  projects " :project="project" :key="project" />
+          <ProjectItem class="q-my-lg q-mb-md" v-for=" project  in  projects " :project="project" :key="project" />
         </div>
       </section>
     </section>
     <section id="about" class="about-container row text-center justify-center">
       <!-- form to contact -->
-      <h3 class="q-mb-xl about-header" style="height: 0px;">About</h3>
+      <h3 class="q-mb-xl about-header text-bold" style="height: 0px;">About</h3>
       <!--  $q.screen.width < 1025 -->
       <div :class="'row items-end col-12 q-pb-md stack-list q-px-sm q-py-md'">
         <a target="_blank" href="https://vuejs.org/guide/introduction.html">
@@ -86,6 +86,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useQuasar } from 'quasar'
 import ProjectItem from 'components/ProjectItem.vue'
 import { useMeta } from 'quasar'
+import 'transition-style';
 
 const metaData = {
   // sets document title
@@ -99,7 +100,7 @@ const buttons = ref(['Home', 'Projects', 'About'])
 const slide = ref(1)
 
 const aboutText = ['With 3 years of experience as a front-end developer, I have worked extensively with the three major JavaScript frameworks: <b>Vue</b>, <b>Angular</b>, and <b>React</b>. Additionally, I have developed full-stack applications using <b>Ruby on Rails</b>, which has provided me with backend and database management knowledge.',
-  'I have a diverse professional background, including freelance work, collaborating with technology consulting firms to build custom applications, and contributing to large companies by maintaining and enhancing existing applications. I am also experienced in implementing unit and end-to-end tests using tools like <b>Jest</b>, <b>Cypress</b>, <b>Jasmine</b> and <b>Karma</b> to ensure code security.', 'Currently based in Barcelona, I enjoy attending blues concerts and comedy shows during my free time.', 'My strengths lie in creating <b>reusable components</b>, designing intuitive user interfaces, communicating effectively, and providing elegant and efficient solutions to various challenges. If you are interested in my services, please feel free to visit my LinkedIn profile for more information and request my curriculum.']
+  'I have a diverse professional background, including freelance work, collaborating with technology consulting firms to build custom applications, and contributing to large companies by maintaining and enhancing existing applications. I am also experienced in implementing unit and end-to-end tests using tools like <b>Jest</b>, <b>Cypress</b>, <b>Jasmine</b> and <b>Karma</b> to ensure code security.', 'Currently based in Barcelona, I enjoy attending blues concerts and comedy shows during my free time.', 'My strengths lie in creating <b>reusable components</b>, designing intuitive user interfaces, communicating effectively, and providing elegant and efficient solutions to various challenges. If you are interested in my services, please feel free to visit my <b><a target="_blank" href="https://www.linkedin.com/in/sami-janafse-9a8639121/">LinkedIn profile</a></b> for more information and request my curriculum.']
 
 
 
@@ -152,12 +153,14 @@ const projects = [
     title: 'The Sensory Lab',
     caption: 'quasar.dev',
     icon: 'school',
-    description: "Maintenance of large Vue, Angular, and React projects. TSlab is a marketing company specializing in creating background music and in-store announcements, so the frontend was connected to an IoT backend using Ruby on Rails and Node. The challenge was to implement new features in the application, migrate APIs from one language to another, implement unit and end-to-end tests, and introduce state management to reduce database queries.",
+    link_main: 'https://thesensorylab.es/',
+    description: "Maintenance of large Vue, Angular, and React projects. Tslab is a marketing company specializing in creating background music and in-store announcements, so the frontend was connected to an IoT backend using Ruby on Rails and Node. The challenge was to implement new features in the application, migrate APIs from one language to another, implement unit and end-to-end tests, and introduce state management to reduce database queries.",
     images: [{ name: 1, url: 'https://dam.malt.com/d9aad559-fc59-4cc3-a9bb-820063dcfc9e?func=bound&w=2048&org_if_sml=1' }, { name: 2, url: 'https://dam.malt.com/2c2cfeea-cce9-4d50-9e6f-47b79ccafd1c?func=bound&w=2048&org_if_sml=1' }, { name: 3, url: 'https://dam.malt.com/10f11de3-7395-43e0-9bd7-a1338bf683a9?func=bound&w=2048&org_if_sml=1' }]
   },
   {
     title: 'Tattoo Me',
     caption: 'quasar.dev',
+    link_main: 'https://www.tattoome.com/',
     description: "A tattoo directory covering Belgium, France, and Spain, with a substantial database of records. The project presented the challenge of migrating a PHP-based system to Ruby on Rails while preserving the impeccable design and bolstering code security through comprehensive testing. Adapting the existing functionality to a different language was a demanding endeavor, but leveraging Test-Driven Development (TDD) allowed for efficient progress, ensuring that all client requirements and instructions were met without any setbacks.",
     icon: 'school',
     images: [{ name: 1, url: 'https://dam.malt.com/1b16481b-2666-4a74-9e7d-8821c9e6bd37?func=bound&w=2048&org_if_sml=1' }, { name: 2, url: 'https://dam.malt.com/0acad9e0-9a60-48d1-89e2-096278ad174d?func=bound&w=2048&org_if_sml=1' }, { name: 3, url: 'https://dam.malt.com/e19e6aaf-a764-4126-9b22-41486cf99181?func=bound&w=2048&org_if_sml=1' }]
@@ -165,23 +168,19 @@ const projects = [
   {
     title: 'Idealement',
     caption: 'quasar.dev',
+    link_main: 'https://www.idealement.fr/',
     description: " A fintech website that offers mortgage calculation and enables users to explore properties that are either under construction or vacant land. One of the key challenges was implementing a fresh design in specific sections of the application while also adjusting tests to accommodate the new features. Emphasizing data visualization was crucial for this project since one of its core functions revolved around presenting data. By ensuring accurate and effective data visualization, users can make better-informed decisions, ultimately adding significant value to the product.",
     icon: 'school',
     images: [{ name: 1, url: 'https://dam.malt.com/3d232806-7212-4c31-97bc-50a3473673bd?func=bound&w=2048&org_if_sml=1' }, { name: 2, url: 'https://dam.malt.com/3f2ce716-c161-4678-b519-3164b7aeccf8?func=bound&w=2048&org_if_sml=1' }, { name: 3, url: 'https://dam.malt.com/1a103350-dba5-470d-baf2-fc10cf85afeb?func=bound&w=2048&org_if_sml=1' }]
   },
+
+
   {
-    title: 'Home Finance',
+    title: 'Freelance Projects',
     caption: 'quasar.dev',
-    description: "A Vue application for tracking household expenses, allowing sorting of expenses by category, price, and date, with complete CRUD operations for expenses and categories. It features a modern style with smooth and seamless transitions.",
+    description: "Some of my freelance and personal projects. Home Finance: A Vue application for tracking household expenses, allowing sorting of expenses by category, price, and date, with complete CRUD operations for expenses and categories. It features a modern style with smooth and seamless transitions. Kitchen Genius: A Vue application that incorporates ChatGPT's artificial intelligence to help you brainstorm culinary recipes. You input a maximum of 5 ingredients, and it generates a recipe that you can share on social media. In the future, additional features will be added to accommodate ingredient selection for people with food intolerances.",
     icon: 'school',
-    images: [{ name: 1, url: 'https://dam.malt.com/4596bcfe-0176-4cf7-88eb-130940fa862a?func=bound&w=2048&org_if_sml=1' }, { name: 2, url: 'https://dam.malt.com/4d044cc9-6bc3-4e82-9a19-13ea020cefa3?func=bound&w=2048&org_if_sml=1' }, { name: 3, url: 'https://dam.malt.com/e823c3cb-24d2-45d6-a899-22346774707d?func=bound&w=2048&org_if_sml=1' }]
-  },
-  {
-    title: 'Kitchen Genius',
-    caption: 'quasar.dev',
-    description: "A Vue application that incorporates ChatGPT's artificial intelligence to help you brainstorm culinary recipes. You input a maximum of 5 ingredients, and it generates a recipe that you can share on social media. In the future, additional features will be added to accommodate ingredient selection for people with food intolerances.",
-    icon: 'school',
-    images: [{ name: 1, url: 'https://dam.malt.com/4abbf498-c9a5-41db-a493-1acc77b02603?func=bound&w=2048&org_if_sml=1' }]
+    images: [{ name: 1, url: 'https://dam.malt.com/bba8f110-6413-4b2e-938d-e5e4db66edd0?func=bound&w=2048&org_if_sml=1' }, { name: 2, url: 'https://dam.malt.com/9a636687-4d2b-4f6d-b954-ae8378924dda?func=bound&w=2048&org_if_sml=1' }]
   },
 
 
@@ -236,6 +235,24 @@ const scrollToSection = (section) => {
 
 </script>
 <style lang="scss">
+@import "transition-style";
+
+@keyframes circle-swoop {
+  from {
+    clip-path: var(--circle-top-right-out);
+  }
+
+  to {
+    clip-path: var(--circle-bottom-right-in);
+  }
+}
+
+.--in-custom {
+  --transition__duration: 1s;
+  --transition__easing: ease-in-out;
+  animation-name: circle-swoop;
+}
+
 body {
   font-family: 'Roboto'
 
@@ -250,6 +267,8 @@ body {
 }
 
 
+
+
 .stack-img-mb {
   height: 50px;
 
@@ -259,7 +278,29 @@ body {
   }
 }
 
+.--in-custom {
+  --transition__duration: 1s;
+  --transition__easing: ease-in-out;
+  animation-name: square-in-hesitate;
+}
 
+@keyframes square-in-hesitate {
+  0% {
+    clip-path: inset(100% 100% 100% 100%);
+  }
+
+  40% {
+    clip-path: inset(33% 33% 33% 33%);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+[transition-style="in:square:hesitate"] {
+  animation: 2.5s cubic-bezier(.25, 1, .30, 1) square-in-hesitate both;
+}
 
 .profile-img {
   height: 280px;
@@ -278,6 +319,26 @@ body {
   display: flex;
   margin: 0 auto;
   text-align: justify;
+}
+
+body.body--dark {
+  background: var(--q-dark-page);
+  animation: backgroundColorPalette 20s infinite;
+
+}
+
+@keyframes backgroundColorPalette {
+  0% {
+    background: var(--q-dark-page)
+  }
+
+  50% {
+    background: #11355c
+  }
+
+  100% {
+    background: var(--q-dark-page)
+  }
 }
 
 .nav {
@@ -307,5 +368,10 @@ body.body--light {
     color: var(--q-dark-positive) !important;
   }
 
+}
+
+a {
+  text-decoration: none !important;
+  color: white
 }
 </style>
