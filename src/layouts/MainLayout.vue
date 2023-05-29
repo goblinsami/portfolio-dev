@@ -253,6 +253,8 @@ const scrollToSection = (section) => {
   animation-name: circle-swoop;
 }
 
+
+
 body {
   font-family: 'Roboto'
 
@@ -359,6 +361,11 @@ body.body--dark {
 
 body.body--light {
   background: #f5f5f5;
+
+  a {
+    text-decoration: none !important;
+    color: rgb(0, 0, 0)
+  }
 
   h1 {
     color: var(--q-dark-positive) !important
