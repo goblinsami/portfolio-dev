@@ -1,1 +1,51 @@
 // app global css in SCSS form
+.test-square {
+  background-color: rgb(133, 68, 68);
+  width: 20%;
+  height: 50px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.test-square-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 20%;
+  height: 50px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 1rem;
+  background: linear-gradient(
+    90deg,
+    rgba(133, 255, 255, 0.5),
+    rgba(255, 255, 255, 0)
+  ); /* Ajusta los valores de opacidad según tus preferencias */
+  animation: fillLoader 5s linear infinite;
+}
+.test-square:after {
+  animation: fillLoader 5s linear infinite;
+}
+.loader {
+  background: linear-gradient(
+    90deg,
+    rgba(133, 68, 68, 0.9),
+    rgba(255, 255, 255, 0.2)
+  ); /* Ajusta los valores de opacidad según tus preferencias */
+  animation: fillLoader 5s linear infinite;
+}
+
+@keyframes fillLoader {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+.title-container {
+  border: 1px rgba(255, 255, 255, 0.2) solid;
+  padding: 2rem;
+  border-radius: 25px;
+}

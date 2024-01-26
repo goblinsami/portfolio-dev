@@ -9,25 +9,37 @@
           icon="settings_brightness"></q-btn>
       </nav>
     </section>
+    <section style="display: none;">
+      <div class="click">
+        <input type="checkbox" class="click_checkbox" />
+      </div>
+    </section>
+
+
     <section id="home" class="container">
       <div class="container row justify-center items-center text-center header">
         <div class="text-positive justify-center">
-          <h1 class="text-white q-ma-none">Sami Janafse</h1><br />
-          <h2 class="q-ma-none">FrontEnd Developer</h2>
-          <div class="q-py-lg row justify-center items-center">
-            <a target="_blank" href="https://vuejs.org/guide/introduction.html">
-              <img src="~assets/vue_logo.png" alt="Vue.js" class="stack-img q-pr-sm" href="" />
+          <div @mousemove="handleMouseMove" :style="tiltStyle" @mouseleave="resetTilt" class="title-container">
+            <h1 class="text-white q-ma-none">Sami Janafse</h1><br />
+            <h2 class="q-ma-none">FrontEnd Developer</h2>
+          </div>
+
+          <div class="q-py-lg row justify-center items-center ">
+            <a target="_blank" class="logo">
+              <img src="~assets/vue_logo.png" alt="Vue.js" class="stack-img q-pr-md click_checkbox" href="" />
             </a>
-            <a target="_blank" href="https://angular.io/">
-              <img src="~assets/cropped.png" alt="Angular" class="stack-img q-pr-sm" />
+            <a target="_blank" href="https://angular.io/" class="click">
+              <img src="~assets/cropped.png" alt="Angular" class="stack-img q-pr-md click_checkbox" />
             </a>
-            <a target="_blank" href="https://react.dev/">
-              <img src="~assets/react_icon.png" alt="react" class="stack-img q-pr-sm" />
+            <a target="_blank" href="https://react.dev/" class="click">
+              <img src="~assets/react_icon.png" alt="react" class="stack-img q-pr-md click_checkbox" />
             </a>
-            <a target="_blank" href="https://guides.rubyonrails.org/">
-              <img src="~assets/rails_icon.png" alt="Ruby on Rails" class="stack-img" />
+            <a target="_blank" href="https://guides.rubyonrails.org/" class="click">
+              <img src="~assets/rails_icon.png" alt="Ruby on Rails" class="stack-img click_checkbox" />
             </a>
           </div>
+          <!--           <section class="logo" @mouseover="startHover" @mouseout="endHover"></section>
+ -->
           <div class="q-py-md">
             <q-btn outline class=" q-mx-md" @click="scrollToSection(button)" v-for=" button  in  buttons.slice(1)"
               :key="button">{{
@@ -82,12 +94,61 @@
 </template>
 
 <script setup >
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
 import { useQuasar } from 'quasar'
 import ProjectItem from 'components/ProjectItem.vue'
 import { useMeta } from 'quasar'
 import 'transition-style';
 
+
+let hoverTimer = null;
+
+const startHover = () => {
+  // Comienza el temporizador cuando el ratón entra
+
+  console.log('entraaaa')
+  hoverTimer = setTimeout(() => {
+    console.log('Ratón ha estado sobre el botón durante 1 segundo');
+    document.querySelector('.logo').classList.add('click_checkbox');
+
+
+  }, 600);
+};
+
+const endHover = () => {
+  console.log('endHover')
+  setTimeout(() => {
+
+    document.querySelector('.logo').classList.remove('click_checkbox');
+  }, 600);
+
+  // Restablece el temporizador si el ratón sale antes de 1 segundo
+  clearTimeout(hoverTimer);
+};
+
+
+//MOUSE HANDLERS
+const tilt = reactive({
+  mouseX: 0,
+  mouseY: 0
+});
+const tiltStyle = ref({
+  transform: 'rotateX(0deg) rotateY(0deg)',
+  transition: 'transform 0.5s ease' // Transición suave
+});
+const handleMouseMove = (event) => {
+  const boundingBox = event.target.getBoundingClientRect();
+  tilt.mouseX = event.clientX - boundingBox.left - boundingBox.width / 2;
+  tilt.mouseY = event.clientY - boundingBox.top - boundingBox.height / 2;
+
+  tiltStyle.value.transform = `rotateX(${tilt.mouseY / 10}deg) rotateY(${tilt.mouseX / 10}deg)`;
+};
+const imgIndex = ref(0);
+const imgID = ref(237);
+
+const resetTilt = () => {
+  tiltStyle.value.transform = 'rotateX(0deg) rotateY(0deg)';
+};
 const metaData = {
   // sets document title
   title: 'Sami Janafse - FrontEnd Developer',
@@ -325,7 +386,7 @@ body {
 
 body.body--dark {
   background: var(--q-dark-page);
-  animation: backgroundColorPalette 20s infinite;
+  //animation: backgroundColorPalette 20s infinite;
 
 }
 
@@ -380,5 +441,227 @@ body.body--light {
 a {
   text-decoration: none !important;
   color: white
+}
+
+// CLICK
+
+.click {
+  perspective: 300px;
+
+  &_checkbox {
+    appearance: none;
+    display: block;
+
+
+    animation-name: elastic-clickOn;
+    animation-duration: 1.8s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    transform-style: preserve-3d;
+
+    &:hover {
+      animation-name: elastic-clickOff;
+    }
+
+    &::before {
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateZ(0.5em);
+      backface-visibility: hidden;
+    }
+
+    &::after {
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      transform: rotateX(180deg) translateZ(0.5em);
+      backface-visibility: hidden;
+    }
+
+    @keyframes elastic-clickOff {
+      0% {
+        transform: rotateX(0deg);
+      }
+
+      28.22% {
+        transform: rotateX(218.76deg);
+      }
+
+      48.82% {
+        transform: rotateX(152.36deg);
+      }
+
+      63.85% {
+        transform: rotateX(199.52deg);
+      }
+
+      74.83% {
+        transform: rotateX(166.41deg);
+      }
+
+      82.84% {
+        transform: rotateX(189.27deg);
+      }
+
+      88.68% {
+        transform: rotateX(173.89deg);
+      }
+
+      92.95% {
+        transform: rotateX(183.81deg);
+      }
+
+      96.07% {
+        transform: rotateX(177.88deg);
+      }
+
+      98.34% {
+        transform: rotateX(180.90deg);
+      }
+
+      100.00% {
+        transform: rotateX(180.00deg);
+      }
+    }
+
+    @keyframes elastic-clickOn {
+      0% {
+        transform: rotateX(180deg);
+      }
+
+      28.22% {
+        transform: rotateX(398.76deg);
+      }
+
+      48.82% {
+        transform: rotateX(332.36deg);
+      }
+
+      63.85% {
+        transform: rotateX(379.52deg);
+      }
+
+      74.83% {
+        transform: rotateX(346.41deg);
+      }
+
+      82.84% {
+        transform: rotateX(369.27deg);
+      }
+
+      88.68% {
+        transform: rotateX(353.89deg);
+      }
+
+      92.95% {
+        transform: rotateX(363.81deg);
+      }
+
+      96.07% {
+        transform: rotateX(357.88deg);
+      }
+
+      98.34% {
+        transform: rotateX(360.90deg);
+      }
+
+      100.00% {
+        transform: rotateX(360.00deg);
+      }
+    }
+  }
+}
+
+// CHECKBOX
+
+.check {
+  position: relative;
+  display: inline-block;
+
+  &_checkbox {
+    appearance: none;
+
+  }
+
+  &_checkbox:checked~&_on {
+    animation-name: none;
+    z-index: 1;
+  }
+
+  &_checkbox:checked~&_off {
+    animation-name: elastic-check;
+    z-index: 2;
+  }
+
+  &_on,
+  &_off {
+    position: absolute;
+    left: -1em;
+    top: 50%;
+    width: 1em;
+    height: 1em;
+    transform: translateY(-50%);
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+  }
+
+  &_on {
+    background-color: red;
+    animation-name: elastic-check;
+    z-index: 2;
+  }
+
+  &_off {
+    background-color: #777;
+    animation-name: none;
+    z-index: 1;
+  }
+
+  @keyframes elastic-check {
+    0% {
+      transform: translateY(-50%) scale(0);
+    }
+
+    49.91% {
+      transform: translateY(-50%) scale(1.38);
+    }
+
+    75.12% {
+      transform: translateY(-50%) scale(0.81);
+    }
+
+    87.85% {
+      transform: translateY(-50%) scale(1.09);
+    }
+
+    94.28% {
+      transform: translateY(-50%) scale(0.96);
+    }
+
+    97.53% {
+      transform: translateY(-50%) scale(1.02);
+    }
+
+    99.17% {
+      transform: translateY(-50%) scale(0.99);
+    }
+
+    100.00% {
+      transform: translateY(-50%) scale(1.00);
+    }
+  }
 }
 </style>
